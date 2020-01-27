@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Objects</h2>
+
+<p id="demo"></p>
+
+<script>
+/*
+function debug_TestNavbarMenu()
+{
+    let navbarMenu = [
+        {label:"Abacaxi", content:"www.google.com"},
+        {label:"Banana", content:"https://br.yahoo.com"},
+        {label:"Carambola", content:"https://www.oantagonista.com/"},
+        {label:"Damasco", content:"https://www.sublimetext.com/"},  
+        {label:"Universidades", content:[
+            {label:"Usp", content:"https://www5.usp.br"},
+            {label:"Unicamp", content:"https://www.unicamp.br/unicamp/"},
+            {label:"Unesp", content:"https://www2.unesp.br/"}
+        ]}      
+    ];
+    console.log("-- debug input");
+    for(let item in navbarMenu)
+    {
+   		alert(item.label);
+    }
+
+}
+*/
+
+/**
+ * Check if the provided item by the list is a valid NavbarItem, wich are:
+ * 0 : Leaf Item, with the format {label:"<string>", content:"<string>"}. 
+ *     Eg: {label:"google", content:"www.google.com" }
+ * 1 : Array Item, an item with the format {label:"string", content:[<list of Leaf Items>]}
+ *     Eg: {label:"Fruits", content:[{label:"grape", content:"01"}, 
+ *         {label:"banana", content:"02"}, {label:"apple", content:"03"}]}
+ * -1 : Invalid Item 
+ */
+function isNavbarListItem(itemx)
+{
+    let itemContent;
+	if(('content' in itemx ) && ('label' in itemx) && ('show' in itemx) )
+    {
+        itemContent = itemx.content;
+        console.log("testing item {label:" + itemx.label + ", content:"  + itemx.content + "}");
+    	if(Object.prototype.toString.call(itemContent) === "[object String]")
+        {
+            console.log("-- content  is a string");
+        	return 0;
+        }
+        else if(Array.isArray(itemContent))
+        {
+            console.log("-- content  is an array");
+        	return 1;
+        }
+        else 
+        {
+            console.log("-- content  is in the wrong format");
+        	return -1 ;
+        }
+    }
+    else 
+    {
+        console.log("-- item is bad formatted. label, content or show are missing");
+    	return -2;
+    }
+}
+
+
+function debug_TestNavbarMenu()
+{
+    let navbarMenu = [
+        {label:"Abacaxi", show:true,  content:"www.google.com"},
+        {label:"Banana", show:true, content:"https://br.yahoo.com"},
+        {label:"Carambola", show:true, content:"https://www.oantagonista.com/"},
+        {label:"Damasco", show:false, content:"https://www.sublimetext.com/"} ,
+        {label:"Universidades", show:true, content:[
+            {label:"Usp", show:false, content:"https://www5.usp.br"},
+            {label:"Unicamp", show:true, content:"https://www.unicamp.br/unicamp/"},
+            {label:"Unesp", show:true, content:"https://www2.unesp.br/"}
+        ]}           
+    ];
+    let parentLabel = "";
+    console.log("-- debug input");
+    let i = 0;
+    let j = 0;
+    let subMenu = [];
+    let itemType = 0;
+    let itemTypeSubMenu = 0;
+	for(i = 0; i < navbarMenu.length; i++)
+    {
+    	//alert("isNavbarItem:" + isNavbarItem(navbarMenu[i]));
+        itemType = isNavbarListItem(navbarMenu[i]);
+
+    	if( itemType === 0)
+        {
+            console.log("LEAF {label:" + navbarMenu[i].label + ", content:" + navbarMenu[i].content + "}");
+        }
+        else if(itemType === 1)
+        {
+            parentLabel = navbarMenu[i].label;
+            subMenu = navbarMenu[i].content;
+            for(j = 0; j < subMenu.length; j++)
+            {
+                if(isNavbarListItem(subMenu[j]) === 0)
+                {
+                    console.log("SUB-LEAF : parentLabel:" + parentLabel + " { label:"+ subMenu[j].label + " ,content:" + subMenu[j].content + "}");
+                }
+                else
+                {
+                    console.log("-- malformed SUB-LEAF item (i:" + i + ", j:" + j + ")");
+                }
+            }
+        }
+        else 
+        {
+            console.log("-- malformed LEAF item i:" + i);
+        }
+    }
+}
+
+debug_TestNavbarMenu();
+// Display some data from the object:
+//document.getElementById("demo").innerHTML = "The car type is " + car.type;
+</script>
+
+</body>
+</html>
+

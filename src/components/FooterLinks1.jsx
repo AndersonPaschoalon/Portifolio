@@ -1,7 +1,7 @@
 /* <FooterLinks1 footerNote= "" 
-                 linkSet={[{url:, label:""}, 
-                           {url:, label:""}, 
-                           {url:, label:""}]}>
+                 linkSet={[{url:, label:"", show:true }, 
+                           {url:, label:"", show:true}, 
+                           {url:, label:"", show:true}]}>
     </FooterLinks1>
 HTML Template: 
       <footer id="footer" class="footer-area">
@@ -40,29 +40,60 @@ class FooterLinks1 extends React.Component
         super(props);
         this.state = {
             footerNote: "",
-            linkSet:""
-        } ;       
-    }
+            linkSet:[]
+        };
+    }     
 
     componentWillMount()
     {
+        let THIS_METHOD = "FooterLinks1.componentWillMount() ";
+        let i = 0;
+        let theLinkSet  = [];
+        if(this.props.linkSet != null && this.props.linkSet.length > 0)
+        {
+            for (i = 0; i < this.props.linkSet.length; i++)
+            {
+                if(_isFooterItem(this.props.linkSet[i]) == 1)
+                {
+                    theLinkSet.push({url:this.props.linkSet[i].url, label:this.props.linkSet[i].label});
+                }
+            }
+            if(this.props.footerNote != null)
+            {
+                this.setState({linkSet:theLinkSet, footerNote:this.props.footerNote});
+            }
+            else 
+            {
+                console.log(THIS_METHOD + "  footerNote property is null or invalid")
+            }
+        }
+        else 
+        {
+            console.log(THIS_METHOD + " linkSet property is null or invalid")
+        }
+
     }
 
     render()
     {
+        let THIS_METHOD = "FooterLinks1.render() ";
+        let footerItemsList = [];
+        let i = 0;
+        let footerMsg = (this.state.footerNote == "")?"": (<p>{this.state.footerNote} </p>);
+        console.log(THIS_METHOD + "footerMsg:{" + footerMsg + "}");
+        for (i=0; i < this.state.linkSet.length; i++)
+        {
+            footerItemsList.push(<FooterItem url={this.state.linkSet[i].url} 
+                                             label={this.state.linkSet[i].label}>
+                                </FooterItem>);
+        }
         return(
             <footer id="footer" className="footer-area">
             <div className="divTable" style="width: 100%;" >
               <div className="divTableBody">
                 <div className="divTableRow">
                   <div className="divTableCell">&nbsp;</div>
-                  <div className="divTableCell"><a className="https://github.com/AndersonPaschoalon" className="nav-link">GitHub</a></div>
-                  <div className="divTableCell"><a className="https://www.researchgate.net/profile/Anderson_Paschoalon2" className="nav-link">Research Gate</a></div>
-                  <div className="divTableCell"><a className="https://br.linkedin.com/in/anderson-paschoalon-61054175" className="nav-link">Linkedin</a></div>
-                  <div className="divTableCell"><a className="http://buscatextual.cnpq.br/buscatextual/visualizacv.do?id=K8136551T3" className="nav-link">Lattes</a></div>
-                  <div className="divTableCell"><a className="https://intrig.dca.fee.unicamp.br/people/" className="nav-link">INGTRIG</a></div>
-                  <div className="divTableCell"><a className="nav-link">Email</a></div>
-                  <div className="divTableCell"><a className="nav-link">Email</a></div>
+                    {footerItemsList}
                   <div className="divTableCell">&nbsp;</div>
                 </div>
               </div>
@@ -72,7 +103,7 @@ class FooterLinks1 extends React.Component
                 <div className="divTableRow">
                   <div className="divTableCell" style="width: 25%;" >&nbsp;</div>  
                   <div className="divTableCell" style="width: 50%;" >
-                    <p>Copyright © 2012 Andrew Louis</p>
+                    {footerMsg}
                   </div> 
                   <div className="divTableCell" style="width: 25%;" >&nbsp;</div>  
                 </div>
@@ -81,4 +112,56 @@ class FooterLinks1 extends React.Component
           </footer>            
         );
     }
+
+    /***
+     * This method returns 1 in case the foots item is visible, 0 it must be hidden, and -1 in case it is 
+     * malformed.
+     */
+    _isFooterItem(itemx)
+    {
+        let THIS_METHOD = "isFooterItem()";
+        let itemContent;
+        if(('url' in itemx ) && ('label' in itemx) && ('show' in itemx) )
+        {
+            if(itemx.show)
+            {
+                return 1;
+            }
+            else 
+            {
+                return 0;
+            }
+        }
+        else 
+        {
+            console.log(THIS_METHOD + "-- item is bad formatted. label, content or show are missing");
+            return -1;
+        }
+    }    
+
+}
+
+
+/***
+ * <FooterItem url="" label:"" ></FooterItem>
+ */
+class FooterItem extends React.Component
+{
+    constructor()
+    {
+        super(props);
+    }
+
+    render()
+    {
+        return(
+            <div className="divTableCell"> 
+                <a href={this.props.url} 
+                   className="nav-link">
+                   {this.props.label}
+                </a>
+            </div>
+        );
+    }
+
 }

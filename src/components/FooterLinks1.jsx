@@ -35,7 +35,7 @@ HTML Template:
 */
 class FooterLinks1 extends React.Component
 {
-    constructor()
+    constructor(props)
     {
         super(props);
         this.state = {

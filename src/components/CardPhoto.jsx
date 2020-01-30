@@ -1,15 +1,15 @@
 // <CardPhoto image="" style="" text="" title=""></CardPhoto>
 class CardPhoto extends React.Component
 {
-    constructor()
+    constructor(props)
     {
         super(props);
         this.state = {
             image: "",
-            style:"",
+            style:null,
             text: "",
             title: ""
-        } ;       
+        };       
     }
 
     componentWillMount()
@@ -18,7 +18,7 @@ class CardPhoto extends React.Component
         let theTitle = "";
         let theImage = "";
         let theText = "";
-        let theStyle = "width:70%";
+        let theStyle = {width:'70%'};
         if(this.props.image != null)
         {
             theImage = this.props.image;
@@ -48,11 +48,11 @@ class CardPhoto extends React.Component
         let THIS_METHOD = "CardPhoto.render() "
         let retCode = (
             <div className="w3-container">
-                {(this.state.theTitle === "")? "": <h2> this.state.theTitle</h2>}
-                <div className="w3-card-4" style={this.state.style}>
-                    <img src={this.state.image} alt="Alps" style="width:100%"></img>
+                <h2> {this.state.title}</h2>
+                <div className="w3-card-4" style={{width:'70%'}}>
+                    <img src={this.state.image} alt="Alps" style={{width:'100%'}}></img>
                     <div className="w3-container w3-center">
-                        {(this.state.text === "")? "":<p> this.state.text</p>}
+                        <p> {this.state.text}</p>
                     </div>
                 </div>  
             </div> 

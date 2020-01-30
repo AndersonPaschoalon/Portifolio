@@ -56,7 +56,7 @@
  // <CardCarousel images={["", "", ""]} title="" btnText="" btnLink="" textLines={[], [], []}></CardCarousel>
 class CardCarousel extends React.Component
 {
-    constructor()
+    constructor(props)
     {
         super(props);
     }
@@ -168,7 +168,7 @@ class CardCarousel extends React.Component
 // <CardCarouselImage active=true/false src="" ></CardCarouselImage>
 class CardCarouselImage extends React.Component
 {
-    constructor()
+    constructor(props)
     {
         super(props);
     }

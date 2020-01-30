@@ -19,9 +19,9 @@
 </div>
 <!--START Card Float Right-->
  */
-class CardCFloatRight extends React.Component
+class CardFloatRight extends React.Component
 {
-    constructor()
+    constructor(props)
     {
         super(props);
     }
@@ -40,9 +40,9 @@ class CardCFloatRight extends React.Component
         let textBody = [];
 
         // Card image
-        if('image' in this.props.image && this.props.image != null && this.props.image != "")
+        if('image' in this.props && this.props.image != null && this.props.image != "")
         {
-          imgElements.push(<img class="d-block w-100" src={this.props.image} alt=""></img>);
+          imgElements.push(<img className="d-block w-100" src={this.props.image} alt=""></img>);
         }
         // title
         if('title' in this.props && this.props.title != null && this.props.title != "")
@@ -72,7 +72,7 @@ class CardCFloatRight extends React.Component
            'btnLink' in this.props && this.props.btnLink != null && this.props.btnLink != "")
         {
             textBody.push(<a href={this.props.btnLink } 
-                             class="mt-auto btn btn-primary" >
+                             className="mt-auto btn btn-primary" >
                                 {this.props.btnText}
                           </a>);
         }

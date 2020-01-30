@@ -1,6 +1,6 @@
 class CardCarousel extends React.Component
 {
-    constructor()
+    constructor(props)
     {
         super(props);
     }

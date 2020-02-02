@@ -19,7 +19,7 @@ ReactDOM.render
 
 ReactDOM.render
 ( 
-    <CardPhoto image="img/img_snowtops.jpg" style={{width:'70%'}} text="Exemplo de texto" title="Exemplo de Titulo">
+    <CardPhoto image="../img/img_snowtops.jpg" style={{width:'70%'}} text="Exemplo de texto" title="Exemplo de Titulo">
     </CardPhoto>,
     document.getElementById("card-photo-sample")
 );
@@ -28,7 +28,7 @@ ReactDOM.render
 ( 
     <CardFloatLeft  btnText="Clique Aqui" 
                      btnLink="www.google.com" 
-                     image="img/img_snowtops.jpg" 
+                     image="../img/img_snowtops.jpg" 
                      title="Card Float Left" 
                      textLines={["linha 1 linha 1", 
                                 "linha2, linha 2"]} >
@@ -41,7 +41,7 @@ ReactDOM.render
 ( 
     <CardFloatRight btnText="Clique Aqui" 
                      btnLink="www.google.com" 
-                     image="img/img_snowtops.jpg" 
+                     image="../img/img_snowtops.jpg" 
                      title="Card Float Right" 
                      textLines={["linha 1 linha 1", 
                                 "linha2, linha 2"]} >
@@ -52,9 +52,9 @@ ReactDOM.render
 
 ReactDOM.render
 ( 
-    <CardCarousel images={["img/forest1.jpg", 
-                           "img/img_snowtops.jpg", 
-                           "img/forest1.jpg"]} 
+    <CardCarousel images={["../img/forest1.jpg", 
+                           "../img/img_snowtops.jpg", 
+                           "../img/forest1.jpg"]} 
                   //imagesStyle={{high:'250px', borderRadius:'8px'}}                                    
                   title="TITULO TITULO" 
                   btnText="ME CLIQUE!!!" 

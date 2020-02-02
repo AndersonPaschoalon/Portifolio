@@ -2,7 +2,6 @@
 /*  Page Elements Container, Button                                                        */
 /*****************************************************************************/
 
-
 .abs-center-x {
 	position: absolute;
 	left: 50%;
@@ -89,17 +88,17 @@ button.navbar-toggler:hover {
 
 .footer-area {
     text-align: center;
-    background: #0076FF;
-    color: white;
-    text-shadow: 0.5px 0.5px;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    width: 100%;
-    -webkit-box-shadow: 0px -4px 5px 0px #ccc;
-    -moz-box-shadow: 0px -4px 5px 0px #ccc;
-    box-shadow: 0px -4px 5px 0px #ccc;
+	background: #0076FF;
+	color: white;
+	text-shadow: 0.5px 0.5px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	width: 100%;
+	-webkit-box-shadow: 0px -4px 5px 0px #ccc;
+	-moz-box-shadow: 0px -4px 5px 0px #ccc;
+	box-shadow: 0px -4px 5px 0px #ccc;
 }
 
 .divTable {
@@ -117,7 +116,7 @@ button.navbar-toggler:hover {
 
 .divTableCell,
 .divTableHead {
-	display: inline-flex;
+	display: table-cell;
 	padding: 3px 10px;
 	flex-wrap: wrap;
 }

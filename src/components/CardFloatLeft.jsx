@@ -82,7 +82,7 @@ class CardFloatLeft extends React.Component
         }  
         // render        
         return(
-        <div className="card float-left">
+        <div className="card float-left" style={{clear:'both'}}>
           <div className="row ">
             <div className="col-sm-7">
               <div className="card-block">

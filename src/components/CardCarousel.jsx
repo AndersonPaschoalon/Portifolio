@@ -1,6 +1,4 @@
 /**
- *
-
 <!-- START Card Carousel -->
 <div class="container py-3">
   <div class="card">
@@ -50,8 +48,7 @@
   </div>
 </div>
 <!-- END of card Carousel -->
-
- */
+*/
 
  // <CardCarousel images={["", "", ""]} title="" btnText="" btnLink="" textLines={[], [], []}></CardCarousel>
 class CardCarousel extends React.Component
@@ -73,7 +70,16 @@ class CardCarousel extends React.Component
         let i = 0;
         let imgElements = [];
         let textBody = [];
-
+        let validatedImageStyle = {};
+        // image style
+        if(this.props.imagesStyle != null && this.props.imagesStyle.constructor == Object)
+        {
+            validatedImageStyle = this.props.imagesStyle;
+        }
+        else 
+        {
+            console.log(THIS_METHOD + " -- PROPERTY <imagesStyle> NOT DEFINED!");
+        }        
         // Card images
         if(Array.isArray(this.props.images))
         {
@@ -81,15 +87,18 @@ class CardCarousel extends React.Component
             {
                 if(i == 0)
                 {
-                    imgElements.push(<CardCarouselImage active={true} src={this.props.images[i]} ></CardCarouselImage>);
+                    imgElements.push(<CardCarouselImage imageStyle={validatedImageStyle} active={true} src={this.props.images[i]} ></CardCarouselImage>);
                 }
                 else 
                 {
-                    imgElements.push(<CardCarouselImage active={false} src={this.props.images[i]} ></CardCarouselImage>);
+                    imgElements.push(<CardCarouselImage imageStyle={validatedImageStyle} active={false} src={this.props.images[i]} ></CardCarouselImage>);
                 }
                 
             }
         }
+
+
+        // Card title
         if('title' in this.props && this.props.title != null && this.props.title != "")
         {
             textBody.push(<h4 className="card-title">{this.props.title}</h4>);
@@ -118,7 +127,7 @@ class CardCarousel extends React.Component
            'btnLink' in this.props && this.props.btnLink != null && this.props.btnLink != "")
         {
             textBody.push(<a href={this.props.btnLink } 
-                             class="mt-auto btn btn-primary" >
+                             className="mt-auto btn btn-primary" >
                                 {this.props.btnText}
                           </a>);
         }
@@ -162,10 +171,9 @@ class CardCarousel extends React.Component
             </div>            
         );
     }
-    
 }
 
-// <CardCarouselImage active=true/false src="" ></CardCarouselImage>
+// <CardCarouselImage active=true/false src="" ></CardCarouselImage imageStyle={}>
 class CardCarouselImage extends React.Component
 {
     constructor(props)
@@ -176,22 +184,25 @@ class CardCarouselImage extends React.Component
     render()
     {
         let THIS_METHOD = "CardCarouselImage.render() "
+        console.log(THIS_METHOD + " -- Image: <" + this.props.src + ">");
         if('src' in this.props)
         {
-            if(this.props.src.active)
+            if(this.props.active)
             {
+                console.log(THIS_METHOD + " Active is TRUE");                
                 return(
                     <div className="carousel-item active">
-                        <img className="d-block" src={this.props.src} alt="">
+                        <img className="d-block" src={this.props.src} style={this.props.imageStyle}>
                         </img>
                     </div>
                 );
             }
             else 
             {
+                console.log(THIS_METHOD + "Active is FALSE");
                 return(
                     <div className="carousel-item">
-                        <img className="d-block" src={this.props.src} alt="">
+                        <img className="d-block" src={this.props.src} style={this.props.imageStyle}>
                         </img>
                     </div>
                 );                
